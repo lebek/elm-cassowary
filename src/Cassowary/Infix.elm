@@ -2,30 +2,48 @@ module Cassowary.Infix exposing (..)
 
 import Cassowary.Equation exposing (..)
 
+
 {-| This module contains infix operators for concise equation construction.
 
 # Infix operators
 @docs (.*.), (.+.), (.<=.), (.>=.), (.=.)
 
 -}
-
 (.+.) : ExpressionAst -> ExpressionAst -> ExpressionAst
-(.+.) = Add
+(.+.) =
+    Add
+
 
 (.*.) : ExpressionAst -> Float -> ExpressionAst
-(.*.) = Coeff
+(.*.) =
+    Coeff
+
 
 (.=.) : ExpressionAst -> ExpressionAst -> Equation
-(.=.) x y = Equality (makeExpression x) (makeExpression y)
+(.=.) x y =
+    Equality (makeExpression x) (makeExpression y)
+
 
 (.<=.) : ExpressionAst -> ExpressionAst -> Equation
-(.<=.) x y = Inequality (makeExpression x) (makeExpression y)
+(.<=.) x y =
+    Inequality (makeExpression x) (makeExpression y)
+
 
 (.>=.) : ExpressionAst -> ExpressionAst -> Equation
-(.>=.) = flip (.<=.)
+(.>=.) =
+    flip (.<=.)
+
 
 infixr 7 .<=.
+
+
 infixr 7 .>=.
+
+
 infixr 7 .=.
+
+
 infixr 8 .+.
+
+
 infixr 9 .*.
