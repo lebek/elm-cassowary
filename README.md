@@ -3,6 +3,14 @@
 # elm-cassowary
 A [Cassowary](https://constraints.cs.washington.edu/solvers/cassowary-tochi.pdf) implementation for [Elm](http://elm-lang.org).
 
+# TODO
+* [x] Simplex
+* [ ] Dual Simplex
+* [ ] Weights
+* [ ] Incremental solver
+* [ ] Performance tests
+* [ ] Documentation
+* [ ] High-level API
 
 # References
 https://github.com/nucleic/kiwi
