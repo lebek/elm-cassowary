@@ -378,10 +378,6 @@ arrayRemove idx array =
 
 
 
--- TODO pivot should move the new basic to a separate map
--- so prob need to change Tableau data structure
-
-
 {-| Perform a pivot - transforms Tableau to new canonical form
 -}
 doPivot : EquationStdForm -> Tableau -> Maybe ( Tableau, EquationStdForm )
@@ -404,7 +400,7 @@ doPivot objective tableau =
             |> Maybe.map (\pivot -> getReplacement pivot |> replace pivot)
 
 
-{-| Pptimizes the given tableau
+{-| Optimizes the given tableau
 -}
 simplex : EquationStdForm -> Tableau -> ( Tableau, EquationStdForm )
 simplex objective tableau =
