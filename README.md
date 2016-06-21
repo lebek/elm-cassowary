@@ -5,6 +5,7 @@ A [Cassowary](https://constraints.cs.washington.edu/solvers/cassowary-tochi.pdf)
 
 # TODO
 * [x] Simplex
+* [ ] Make initial solution feasible
 * [ ] Dual Simplex
 * [ ] Weights
 * [ ] Incremental solver

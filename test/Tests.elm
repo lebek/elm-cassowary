@@ -47,7 +47,6 @@ makeProgram constraints objective =
 
 
 -- Ex 2.1 Linear Programming: Foundations and Extensions
--- (x1,x2,x3,x4) = (2,0,1,0), ζ = 17.
 
 
 problem1 =
@@ -57,10 +56,11 @@ problem1 =
         ]
         (Var "p" .=. Var "x1" .*. 6 .+. Var "x2" .*. 8 .+. Var "x3" .*. 5 .+. Var "x4" .*. 9)
 
+solution1 = Dict.fromList [
+  ("x1", 2), ("x2",0), ("x3", 1), ("x4",0), ("p", 17)]
 
 
 -- Ex 2.2 Linear Programming: Foundations and Extensions
--- (x1,x2) = (1,0), ζ = 2.
 
 
 problem2 =
@@ -72,11 +72,34 @@ problem2 =
         ]
         (Var "p" .=. Var "x1" .*. 2 .+. Var "x2" .*. 8)
 
+solution2 = Dict.fromList [
+  ("x1", 1), ("x2", 0), ("p", 2)]
+
+-- Ex 2.3 Linear Programming: Foundations and Extensions
+
+
+problem3 =
+    makeProgram
+        [ Var "x1" .*. (-1) .+. Var "x2" .*. (-1) .+. Var "x3" .*. (-1) .<=. Lit (-2)
+        , Var "x1" .*. 2 .+. Var "x2" .*. (-1) .+. Var "x3" .<=. Lit 1
+        ]
+        (Var "p" .=. Var "x1" .*. 2 .+. Var "x2" .*. (-6))
+
+solution3 = Dict.fromList [
+  ("x1", 0), ("x2", 0.5), ("x3", 1.5), ("p", -3)]
+
+assertResultsEqual result1 result2 =
+  assertEqual (Dict.toList result1) (Dict.toList result2)
+
+testProblem problem solution =
+  assertResultsEqual solution ((uncurry simplexResult) <| (uncurry simplex) problem)
 
 pivotSuite : Test
 pivotSuite =
     suite "Pivot tests"
-        [ test "Simple" <| problem2 `assertEqual` (simplex (snd problem2) (fst problem2))
+        [ test "Ex 2.1" <| testProblem problem1 solution1
+        , test "Ex 2.2" <| testProblem problem2 solution2
+        , test "Ex 2.3" <| testProblem problem3 solution3
         ]
 
 

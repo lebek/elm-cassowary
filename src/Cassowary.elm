@@ -1,4 +1,4 @@
-module Cassowary exposing (standardForm, doPivot, simplex)
+module Cassowary exposing (standardForm, doPivot, simplex, simplexResult)
 
 {-| A library for building constraint-based UIs
 
@@ -6,7 +6,7 @@ module Cassowary exposing (standardForm, doPivot, simplex)
 @docs standardForm
 
 # Solving
-@docs doPivot, simplex
+@docs doPivot, simplex, simplexResult
 
 -}
 
@@ -380,8 +380,8 @@ arrayRemove idx array =
 
 {-| Perform a pivot - transforms Tableau to new canonical form
 -}
-doPivot : EquationStdForm -> Tableau -> Maybe ( Tableau, EquationStdForm )
-doPivot objective tableau =
+doPivot : Tableau -> EquationStdForm -> Maybe ( Tableau, EquationStdForm )
+doPivot tableau objective =
     let
         pivot =
             getPivot objective tableau.basic tableau.nonBasic
@@ -402,11 +402,18 @@ doPivot objective tableau =
 
 {-| Optimizes the given tableau
 -}
-simplex : EquationStdForm -> Tableau -> ( Tableau, EquationStdForm )
-simplex objective tableau =
-    case doPivot objective tableau of
+simplex : Tableau -> EquationStdForm -> ( Tableau, EquationStdForm )
+simplex tableau objective =
+    case doPivot tableau objective of
         Just ( tableau, objective ) ->
-            simplex objective tableau
+            simplex tableau objective
 
         Nothing ->
             ( tableau, objective )
+
+-- TODO include _all_ vars and use correct objective var name
+{-| -}
+simplexResult : Tableau -> EquationStdForm -> Dict.Dict String Float
+simplexResult tableau objective =
+    Dict.map (\k v -> getConst v) tableau.basic
+        |> Dict.insert "p" (getConst objective)
