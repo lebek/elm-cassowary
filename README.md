@@ -3,6 +3,8 @@ A [Cassowary](https://constraints.cs.washington.edu/solvers/cassowary-tochi.pdf)
 
 See [elm-cassowaryjs](https://github.com/lebek/elm-cassowaryjs) for more background.
 
+For now I'm taking a break from this. Much more involved than I expected.
+
 # TODO
 * [x] Simplex
 * [ ] Make initial solution feasible
