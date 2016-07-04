@@ -1,7 +1,7 @@
-*This package is a work-in-progress, do not use*
-
 # elm-cassowary
 A [Cassowary](https://constraints.cs.washington.edu/solvers/cassowary-tochi.pdf) implementation for [Elm](http://elm-lang.org).
+
+See [elm-cassowaryjs](https://github.com/lebek/elm-cassowaryjs) for more background.
 
 # TODO
 * [x] Simplex
